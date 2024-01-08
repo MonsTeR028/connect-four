@@ -1,6 +1,4 @@
 __pycache__/
 .idea/
 build/
-Sphinx/
-Sphinx/source/
 venv/
