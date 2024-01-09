@@ -37,4 +37,16 @@ def test_detecter4horizontalPlateau() -> None:
     return None
 
 
-test_detecter4horizontalPlateau()
+# test_detecter4horizontalPlateau()
+
+
+def test_detecter4verticalPlateau() -> None:
+    plateau = construirePlateau()
+    for i in range(20):
+        placerPionPlateau(plateau, construirePion(choice(const.COULEURS)), randint(0, const.NB_COLUMNS - 1))
+    print(toStringPlateau(plateau))
+    print(detecter4verticalPlateau(plateau, const.ROUGE))
+    return None
+
+
+test_detecter4verticalPlateau()

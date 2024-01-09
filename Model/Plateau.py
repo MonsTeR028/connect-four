@@ -117,8 +117,7 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
     if type(couleur) != int:
         raise TypeError("detecter4horizontalPlateau : le second paramètre n’est pas un entier")
     if couleur not in const.COULEURS:
-        raise \
-            ValueError(f"detecter4horizontalPlateau : La valeur de la couleur {couleur} n’est pas correcte")
+        raise ValueError(f"detecter4horizontalPlateau : La valeur de la couleur {couleur} n’est pas correcte")
 
     pions = 0
     liste = []
@@ -134,6 +133,47 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
             else:
                 pions = 0
                 liste = []
+            if pions == 4:
+                listeFinale.append(liste)
+                pions = 0
+                liste = []
+        pions = 0
+        liste = []
+    return listeFinale
+
+
+def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
+    """
+    Retourne toutes les séries de 4 pions alignés verticalement à la suite
+
+    :param plateau: Tableau 2D (liste de listes), pouvant contenir des pions ou rien
+    :param couleur: Constante parmi la liste const.COULEURS
+    :return: Retourne une liste de listes de toutes les séries de 4 pions alignés verticalement,
+    si aucune série de 4 pions retourne une liste vide
+    """
+    if not type_plateau(plateau):
+        raise TypeError("detecter4verticalPlateau : Le premier paramètre ne correspond pas à un plateau")
+    if type(couleur) != int:
+        raise TypeError("detecter4verticalPlateau : le second paramètre n’est pas un entier")
+    if couleur not in const.COULEURS:
+        raise ValueError(f"detecter4verticalPlateau : La valeur de la couleur {couleur} n’est pas correcte")
+
+    pions = 0
+    liste = []
+    listeFinale = []
+
+    for colonnes in range(len(plateau[0])):
+        for lignes in range(len(plateau)):
+            if plateau[lignes][colonnes] is None:
+                pions = 0
+                liste = []
+            elif plateau[lignes][colonnes][const.COULEUR] == couleur:
+                pions += 1
+                liste.append(plateau[lignes][colonnes])
+                print(lignes, colonnes, pions)
+            else:
+                pions = 0
+                liste.append(plateau[lignes][colonnes])
             if pions == 4:
                 listeFinale.append(liste)
                 pions = 0
