@@ -276,3 +276,22 @@ def getPionsGagnantsPlateau(plateau: list) -> list:
     liste.extend(detecter4diagonaleIndirectePlateau(plateau, const.JAUNE))
     liste.extend(detecter4diagonaleIndirectePlateau(plateau, const.ROUGE))
     return liste
+
+
+def isRempliPlateau(plateau: list) -> bool:
+    """
+    La fonction reçoit en paramètre un plateau et qui retourne True si le plateau est complètement rempli de pions,
+     False sinon.
+
+    :param plateau: Tableau 2D (liste de listes), pouvant contenir des pions ou rien
+    :return: Retourne True si le plateau est complètement rempli de pions,
+     False sinon.
+    """
+    if not type_plateau(plateau):
+        raise TypeError("isRempliTableau : Le paramètre n’est pas un plateau")
+
+    res = True
+    for i in range(const.NB_COLUMNS):
+        if plateau[0][i] is None:
+            res = False
+    return res
