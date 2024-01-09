@@ -37,7 +37,7 @@ def test_detecter4horizontalPlateau() -> None:
     return None
 
 
-test_detecter4horizontalPlateau()
+# test_detecter4horizontalPlateau()
 
 
 def test_detecter4verticalPlateau() -> None:
@@ -62,3 +62,15 @@ def test_detecter4diagonaleDirectePlateau() -> None:
 
 
 # test_detecter4diagonaleDirectePlateau()
+
+
+def test_detecter4diagonaleIndirectePlateau() -> None:
+    plateau = construirePlateau()
+    for i in range(100):
+        placerPionPlateau(plateau, construirePion(choice(const.COULEURS)), randint(0, const.NB_COLUMNS - 1))
+    print(toStringPlateau(plateau))
+    print(detecter4diagonaleIndirectePlateau(plateau, const.ROUGE))
+    return None
+
+
+test_detecter4diagonaleIndirectePlateau()

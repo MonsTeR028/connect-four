@@ -216,3 +216,38 @@ def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
                     listeFinale.append(liste)
             liste = []
     return listeFinale
+
+def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
+    """
+        Retourne toutes les séries de 4 pions alignés en diagonales indirectes à la suite
+
+        :param plateau: Tableau 2D (liste de listes), pouvant contenir des pions ou rien
+        :param couleur: Constante parmi la liste const.COULEURS
+        :return: Retourne une liste de listes de toutes les séries de 4 pions alignés en diagonales indirectes,
+        si aucune série de 4 pions retourne une liste vide
+        """
+    if not type_plateau(plateau):
+        raise TypeError("detecter4diagonaleindirectePlateau : Le premier paramètre ne correspond pas à un plateau")
+    if type(couleur) != int:
+        raise TypeError("detecter4diagonaleindirectePlateau : le second paramètre n’est pas un entier")
+    if couleur not in const.COULEURS:
+        raise ValueError(f"detecter4diagonaleindirectePlateau : La valeur de la couleur {couleur} n’est pas correcte")
+
+    liste = []
+    listeFinale = []
+    listeBloquer = []
+
+    for lignes in range(const.NB_LINES-1, const.NB_LINES-4, -1):
+        for colonnes in range(const.NB_COLUMNS-3):
+            if plateau[lignes][colonnes] is not None and plateau[lignes][colonnes][const.COULEUR] == couleur \
+                    and (lignes, colonnes) not in listeBloquer:
+                liste.append(plateau[lignes][colonnes])
+                for i in range(3):
+                    if plateau[lignes-i-1][colonnes+i+1] is not None \
+                            and plateau[lignes-i-1][colonnes+i+1][const.COULEUR] == couleur:
+                        liste.append(plateau[lignes-i-1][colonnes+i+1])
+                        listeBloquer.append((lignes-i-1, colonnes+i+1))
+                if len(liste) == 4:
+                    listeFinale.append(liste)
+            liste = []
+    return listeFinale
