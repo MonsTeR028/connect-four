@@ -13,7 +13,8 @@ def test_plateau() -> None:
     print(plateau)
     return None
 
-#test_plateau()
+
+# test_plateau()
 
 
 def test_toStringPlateau() -> None:
@@ -23,4 +24,17 @@ def test_toStringPlateau() -> None:
     print(toStringPlateau(plateau))
     return None
 
-test_toStringPlateau()
+
+# test_toStringPlateau()
+
+
+def test_detecter4horizontalPlateau() -> None:
+    plateau = construirePlateau()
+    for i in range(20):
+        placerPionPlateau(plateau, construirePion(choice(const.COULEURS)), randint(0, const.NB_COLUMNS - 1))
+    print(toStringPlateau(plateau))
+    print(detecter4horizontalPlateau(plateau, const.ROUGE))
+    return None
+
+
+test_detecter4horizontalPlateau()

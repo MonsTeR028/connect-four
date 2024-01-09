@@ -30,7 +30,7 @@ def type_plateau(plateau: list) -> bool:
     wrong = "Erreur !"
     if next((wrong for line in plateau if type(line) != list or len(line) != const.NB_COLUMNS), True) == wrong:
         return False
-    if next((wrong for line in plateau for c in line if not(c is None) and not type_pion(c)), True) == wrong:
+    if next((wrong for line in plateau for c in line if not (c is None) and not type_pion(c)), True) == wrong:
         return False
     return True
 
@@ -63,7 +63,7 @@ def placerPionPlateau(plateau: list, pion: dict, colonne: int) -> int:
         raise TypeError("placerPionPlateau : Le second paramètre n'est pas un pion")
     if type(colonne) is not int:
         raise TypeError("placerPionPlateau : Le troisième paramètre n'est pas un entier")
-    if colonne < 0 or colonne > const.NB_COLUMNS-1:
+    if colonne < 0 or colonne > const.NB_COLUMNS - 1:
         raise ValueError(f"placerPionPlateau : La valeur de la colonne {colonne} n’est pas correcte")
 
     rep = 0
@@ -80,6 +80,14 @@ def placerPionPlateau(plateau: list, pion: dict, colonne: int) -> int:
 
 
 def toStringPlateau(plateau: list) -> str:
+    """
+    Transforme un plateau en texte ordonnée et lisible
+    :param plateau: Tableau 2D (liste de listes), pouvant contenir des pions ou rien
+    :return: Retourne une chaîne de caractère représentant le plateau
+    """
+    if not type_plateau(plateau):
+        raise TypeError("toStringPlateau : Le paramètre n'est pas un plateau")
+
     resultat = ""
     for lignes in range(len(plateau)):
         for colonnes in range(len(plateau[lignes])):
@@ -93,3 +101,43 @@ def toStringPlateau(plateau: list) -> str:
         resultat += f"| {lignes}\n"
     resultat += " 0 1 2 3 4 5 6"
     return resultat
+
+
+def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
+    """
+    Retourne toutes les séries de 4 pions alignés horizontalement à la suite
+
+    :param plateau: Tableau 2D (liste de listes), pouvant contenir des pions ou rien
+    :param couleur: Constante parmi la liste const.COULEURS
+    :return: Retourne une liste de listes de toutes les séries de 4 pions alignés horizontalement,
+    si aucune série de 4 pions retourne une liste vide
+    """
+    if not type_plateau(plateau):
+        raise TypeError("detecter4horizontalPlateau : Le premier paramètre ne correspond pas à un plateau")
+    if type(couleur) != int:
+        raise TypeError("detecter4horizontalPlateau : le second paramètre n’est pas un entier")
+    if couleur not in const.COULEURS:
+        raise \
+            ValueError(f"detecter4horizontalPlateau : La valeur de la couleur {couleur} n’est pas correcte")
+
+    pions = 0
+    liste = []
+    listeFinale = []
+    for lignes in range(len(plateau)):
+        for colonnes in range(len(plateau[lignes])):
+            if plateau[lignes][colonnes] is None:
+                pions = 0
+                liste = []
+            elif plateau[lignes][colonnes][const.COULEUR] == couleur:
+                pions += 1
+                liste.append(plateau[lignes][colonnes])
+            else:
+                pions = 0
+                liste = []
+            if pions == 4:
+                listeFinale.append(liste)
+                pions = 0
+                liste = []
+        pions = 0
+        liste = []
+    return listeFinale
