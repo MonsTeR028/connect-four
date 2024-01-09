@@ -77,3 +77,19 @@ def placerPionPlateau(plateau: list, pion: dict, colonne: int) -> int:
             plateau[lignes - 1][colonne] = None
             rep = lignes
     return rep
+
+
+def toStringPlateau(plateau: list) -> str:
+    resultat = ""
+    for lignes in range(len(plateau)):
+        for colonnes in range(len(plateau[lignes])):
+            if plateau[lignes][colonnes] is None:
+                resultat += "| "
+            else:
+                if plateau[lignes][colonnes][const.COULEUR] == const.JAUNE:
+                    resultat += "|\x1B[43m \x1B[0m"
+                else:
+                    resultat += "|\x1B[41m \x1B[0m"
+        resultat += f"| {lignes}\n"
+    resultat += " 0 1 2 3 4 5 6"
+    return resultat

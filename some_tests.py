@@ -13,10 +13,14 @@ def test_plateau() -> None:
     print(plateau)
     return None
 
-print(test_plateau())
+#test_plateau()
 
 
-# Essais sur les couleurs
-print("\x1B[43m \x1B[0m : carré jaune ")
-print("\x1B[41m \x1B[0m : carré rouge ")
-print("\x1B[41mA\x1B[0m : A sur fond rouge")
+def test_toStringPlateau() -> None:
+    plateau = construirePlateau()
+    for i in range(20):
+        placerPionPlateau(plateau, construirePion(choice(const.COULEURS)), randint(0, const.NB_COLUMNS - 1))
+    print(toStringPlateau(plateau))
+    return None
+
+test_toStringPlateau()
