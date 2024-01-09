@@ -71,7 +71,7 @@ def placerPionPlateau(plateau: list, pion: dict, colonne: int) -> int:
         plateau[0][colonne] = pion
     else:
         rep = -1
-    for lignes in range(1, len(plateau)):
+    for lignes in range(1, const.NB_LINES):
         if plateau[lignes][colonne] is None:
             plateau[lignes][colonne] = pion
             plateau[lignes - 1][colonne] = None
@@ -89,8 +89,8 @@ def toStringPlateau(plateau: list) -> str:
         raise TypeError("toStringPlateau : Le paramètre n'est pas un plateau")
 
     resultat = ""
-    for lignes in range(len(plateau)):
-        for colonnes in range(len(plateau[lignes])):
+    for lignes in range(const.NB_LINES):
+        for colonnes in range(const.NB_COLUMNS):
             if plateau[lignes][colonnes] is None:
                 resultat += "| "
             else:
@@ -122,8 +122,8 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
     pions = 0
     liste = []
     listeFinale = []
-    for lignes in range(len(plateau)):
-        for colonnes in range(len(plateau[lignes])):
+    for lignes in range(const.NB_LINES):
+        for colonnes in range(const.NB_COLUMNS):
             if plateau[lignes][colonnes] is None:
                 pions = 0
                 liste = []
@@ -162,15 +162,14 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
     liste = []
     listeFinale = []
 
-    for colonnes in range(len(plateau[0])):
-        for lignes in range(len(plateau)):
+    for colonnes in range(const.NB_COLUMNS):
+        for lignes in range(const.NB_LINES):
             if plateau[lignes][colonnes] is None:
                 pions = 0
                 liste = []
             elif plateau[lignes][colonnes][const.COULEUR] == couleur:
                 pions += 1
                 liste.append(plateau[lignes][colonnes])
-                print(lignes, colonnes, pions)
             else:
                 pions = 0
                 liste.append(plateau[lignes][colonnes])
@@ -180,4 +179,40 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
                 liste = []
         pions = 0
         liste = []
+    return listeFinale
+
+
+def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
+    """
+        Retourne toutes les séries de 4 pions alignés en diagonales directes à la suite
+
+        :param plateau: Tableau 2D (liste de listes), pouvant contenir des pions ou rien
+        :param couleur: Constante parmi la liste const.COULEURS
+        :return: Retourne une liste de listes de toutes les séries de 4 pions alignés en diagonales directes,
+        si aucune série de 4 pions retourne une liste vide
+        """
+    if not type_plateau(plateau):
+        raise TypeError("detecter4diagonaleDirectePlateau : Le premier paramètre ne correspond pas à un plateau")
+    if type(couleur) != int:
+        raise TypeError("detecter4diagonaleDirectePlateau : le second paramètre n’est pas un entier")
+    if couleur not in const.COULEURS:
+        raise ValueError(f"detecter4diagonaleDirectePlateau : La valeur de la couleur {couleur} n’est pas correcte")
+
+    liste = []
+    listeFinale = []
+    listeBloquer = []
+
+    for lignes in range(const.NB_LINES-3):
+        for colonnes in range(const.NB_COLUMNS-3):
+            if plateau[lignes][colonnes] is not None and plateau[lignes][colonnes][const.COULEUR] == couleur \
+                    and (lignes, colonnes) not in listeBloquer:
+                liste.append(plateau[lignes][colonnes])
+                for i in range(3):
+                    if plateau[lignes+i+1][colonnes+i+1] is not None \
+                            and plateau[lignes+i+1][colonnes+i+1][const.COULEUR] == couleur:
+                        liste.append(plateau[lignes+i+1][colonnes+i+1])
+                        listeBloquer.append((lignes+i+1, colonnes+i+1))
+                if len(liste) == 4:
+                    listeFinale.append(liste)
+            liste = []
     return listeFinale
