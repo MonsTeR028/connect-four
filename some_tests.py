@@ -73,4 +73,16 @@ def test_detecter4diagonaleIndirectePlateau() -> None:
     return None
 
 
-test_detecter4diagonaleIndirectePlateau()
+# test_detecter4diagonaleIndirectePlateau()
+
+
+def test_getPionsGagnantsPlateau() -> None:
+    plateau = construirePlateau()
+    for i in range(15):
+        placerPionPlateau(plateau, construirePion(choice(const.COULEURS)), randint(0, const.NB_COLUMNS - 1))
+    print(toStringPlateau(plateau))
+    print(getPionsGagnantsPlateau(plateau))
+    return None
+
+
+test_getPionsGagnantsPlateau()

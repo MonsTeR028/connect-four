@@ -251,3 +251,28 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
                     listeFinale.append(liste)
             liste = []
     return listeFinale
+
+
+def getPionsGagnantsPlateau(plateau: list) -> list:
+    """
+    Fonction qui retourne toutes les suites de 4 possibles (verticales, horizontales et les deux diagonales)
+    pour les deux couleurs de pion
+
+    :param plateau: Tableau 2D (liste de listes), pouvant contenir des pions ou rien
+    :return: Retourne une liste de listes de toutes les séries de 4 pions alignés que ce soit horizontalement,
+    verticalement, ou diagonalement pour les deux couleurs
+    et si aucune série de 4 pions n'existe retourne une liste vide.
+    """
+    if not type_plateau(plateau):
+        raise TypeError("getPionsGagnantsPlateau : Le paramètre n’est pas un plateau")
+
+    liste = []
+    liste.extend(detecter4horizontalPlateau(plateau, const.JAUNE))
+    liste.extend(detecter4horizontalPlateau(plateau, const.ROUGE))
+    liste.extend(detecter4verticalPlateau(plateau, const.JAUNE))
+    liste.extend(detecter4verticalPlateau(plateau, const.ROUGE))
+    liste.extend(detecter4diagonaleDirectePlateau(plateau, const.JAUNE))
+    liste.extend(detecter4diagonaleDirectePlateau(plateau, const.ROUGE))
+    liste.extend(detecter4diagonaleIndirectePlateau(plateau, const.JAUNE))
+    liste.extend(detecter4diagonaleIndirectePlateau(plateau, const.ROUGE))
+    return liste
