@@ -1,3 +1,4 @@
+from Model import Plateau
 from Model.Constantes import *
 from Model.Plateau import *
 from Model.Pion import *
@@ -108,4 +109,14 @@ def test_construireJoueur() -> None:
     return None
 
 
-test_construireJoueur()
+# test_construireJoueur()
+
+
+def test_getCouleurJoueur() -> None:
+    joueur = construireJoueur(const.ROUGE)
+    print(joueur)
+    print(getCouleurJoueur(joueur))
+    return None
+
+
+test_getCouleurJoueur()
