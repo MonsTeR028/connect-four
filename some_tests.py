@@ -119,4 +119,14 @@ def test_getCouleurJoueur() -> None:
     return None
 
 
-test_getCouleurJoueur()
+# test_getCouleurJoueur()
+
+
+def test_getPlateauJoueur() -> None:
+    joueur = construireJoueur(const.JAUNE)
+    print(joueur)
+    print(getPlateauJoueur(joueur))
+    return None
+
+
+test_getPlateauJoueur()

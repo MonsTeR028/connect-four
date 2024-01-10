@@ -50,7 +50,7 @@ def construireJoueur(couleur: int) -> dict:
     return joueur
 
 
-def getCouleurJoueur(joueur: dict) -> list:
+def getCouleurJoueur(joueur: dict) -> int:
     """
     Fonction qui permet de retourner la couleur d'un joueur
 
@@ -61,3 +61,16 @@ def getCouleurJoueur(joueur: dict) -> list:
         raise TypeError("getCouleurJoueur : Le paramètre ne correspond pas à un joueur")
 
     return joueur[const.COULEUR]
+
+
+def getPlateauJoueur(joueur: dict) -> list:
+    """
+    Fonction qui permet de retourner le plateau d'un joueur
+
+    :param joueur: Paramètre représenter par un dictionnaire composé d'une couleur, d'un plateau et de placer pion.
+    :return: Retourne le plateau d'un joueur
+    """
+    if not type_joueur(joueur):
+        raise TypeError("getCouleurJoueur : Le paramètre ne correspond pas à un joueur")
+
+    return joueur[const.PLATEAU]
