@@ -139,4 +139,15 @@ def test_getPlacerPionJoueur() -> None:
     return None
 
 
-test_getPlacerPionJoueur()
+# test_getPlacerPionJoueur()
+
+
+def test_getPionJoueur() -> None:
+    joueur = construireJoueur(const.ROUGE)
+    print(joueur)
+    pion = getPionJoueur(joueur)
+    print(pion)
+    return None
+
+
+test_getPionJoueur()
