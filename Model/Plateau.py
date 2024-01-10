@@ -134,7 +134,7 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
                 pions = 0
                 liste = []
             if pions == 4:
-                listeFinale.append(liste)
+                listeFinale.extend(liste)
                 pions = 0
                 liste = []
         pions = 0
@@ -174,7 +174,7 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
                 pions = 0
                 liste.append(plateau[lignes][colonnes])
             if pions == 4:
-                listeFinale.append(liste)
+                listeFinale.extend(liste)
                 pions = 0
                 liste = []
         pions = 0
@@ -213,7 +213,7 @@ def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
                         liste.append(plateau[lignes+i+1][colonnes+i+1])
                         listeBloquer.append((lignes+i+1, colonnes+i+1))
                 if len(liste) == 4:
-                    listeFinale.append(liste)
+                    listeFinale.extend(liste)
             liste = []
     return listeFinale
 
@@ -248,7 +248,7 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
                         liste.append(plateau[lignes-i-1][colonnes+i+1])
                         listeBloquer.append((lignes-i-1, colonnes+i+1))
                 if len(liste) == 4:
-                    listeFinale.append(liste)
+                    listeFinale.extend(liste)
             liste = []
     return listeFinale
 
@@ -267,6 +267,7 @@ def getPionsGagnantsPlateau(plateau: list) -> list:
         raise TypeError("getPionsGagnantsPlateau : Le paramètre n’est pas un plateau")
 
     liste = []
+    liste.extend(detecter4horizontalPlateau(plateau, const.ROUGE))
     liste.extend(detecter4horizontalPlateau(plateau, const.JAUNE))
     liste.extend(detecter4horizontalPlateau(plateau, const.ROUGE))
     liste.extend(detecter4verticalPlateau(plateau, const.JAUNE))
