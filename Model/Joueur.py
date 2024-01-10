@@ -71,6 +71,19 @@ def getPlateauJoueur(joueur: dict) -> list:
     :return: Retourne le plateau d'un joueur
     """
     if not type_joueur(joueur):
-        raise TypeError("getCouleurJoueur : Le paramètre ne correspond pas à un joueur")
+        raise TypeError("getPlateauJoueur : Le paramètre ne correspond pas à un joueur")
 
     return joueur[const.PLATEAU]
+
+
+def getPlacerPionJoueur(joueur: dict):
+    """
+    Fonction qui permet de retourner le placer pion d'un joueur
+
+    :param joueur: Paramètre représenter par un dictionnaire composé d'une couleur, d'un plateau et de placer pion.
+    :return: Retourne la fonction du dictionnaire de placer pion
+    """
+    if not type_joueur(joueur):
+        raise TypeError("getPlacerPionJoueur : Le paramètre ne correspond pas à un joueur")
+
+    return joueur[const.PLACER_PION]
