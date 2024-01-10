@@ -101,3 +101,20 @@ def getPionJoueur(joueur: dict) -> dict:
 
     pionJoueur = {const.COULEUR: joueur[const.COULEUR], const.ID: None}
     return pionJoueur
+
+
+def setPlateauJoueur(joueur: dict, plateau: list) -> None:
+    """
+    Cette fonction « affecte » le plateau au joueur
+
+    :param joueur: Paramètre représenter par un dictionnaire composé d'une couleur, d'un plateau et de placer pion.
+    :param plateau: Tableau 2D (liste de listes), pouvant contenir des pions ou rien
+    :return: Ne retourne rien
+    """
+    if not type_joueur(joueur):
+        raise TypeError("setPlateauJoueur : Le premier paramètre ne correspond pas à un joueur")
+    if not type_plateau(plateau):
+        raise TypeError("setPlateauJoueur : Le second paramètre ne correspond pas à un plateau")
+
+    joueur[const.PLATEAU] = plateau
+    return None

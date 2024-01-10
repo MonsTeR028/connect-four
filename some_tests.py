@@ -150,4 +150,16 @@ def test_getPionJoueur() -> None:
     return None
 
 
-test_getPionJoueur()
+# test_getPionJoueur()
+
+
+def test_setPlateauJoueur() -> None:
+    joueur = construireJoueur(const.JAUNE)
+    print(joueur)
+    plateau = construirePlateau()
+    setPlateauJoueur(joueur, plateau)
+    print(joueur)
+    return None
+
+
+test_setPlateauJoueur()
