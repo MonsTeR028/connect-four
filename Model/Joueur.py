@@ -118,3 +118,20 @@ def setPlateauJoueur(joueur: dict, plateau: list) -> None:
 
     joueur[const.PLATEAU] = plateau
     return None
+
+
+def setPlacerPionJoueur(joueur: dict, fn) -> None:
+    """
+    Cette fonction « affecte » une fonction au joueur
+
+    :param joueur: Paramètre représenter par un dictionnaire composé d'une couleur, d'un plateau et de placer pion.
+    :param fn: Ce paramètre est une fonction que l'on veut affecter au joueur
+    :return: Ne retourne rien
+    """
+    if not type_joueur(joueur):
+        raise TypeError("setPlacerPionJoueur : Le premier paramètre ne correspond pas à un joueur")
+    if not callable(fn):
+        raise TypeError("setPlacerPionJoueur : le second paramètre n’est pas une fonction")
+
+    joueur[const.PLACER_PION] = fn
+    return None
