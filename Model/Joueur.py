@@ -3,7 +3,6 @@ from Model.Pion import *
 from Model.Plateau import *
 
 
-
 #
 # Ce fichier contient les fonctions gérant le joueur
 #
@@ -27,11 +26,25 @@ def type_joueur(joueur: dict) -> bool:
     if const.COULEUR not in joueur or joueur[const.COULEUR] not in const.COULEURS:
         return False
     if const.PLACER_PION not in joueur or (joueur[const.PLACER_PION] is not None
-            and not callable(joueur[const.PLACER_PION])):
+                                           and not callable(joueur[const.PLACER_PION])):
         return False
     if const.PLATEAU not in joueur or (joueur[const.PLATEAU] is not None and
-        not type_plateau(joueur[const.PLATEAU])):
+                                       not type_plateau(joueur[const.PLATEAU])):
         return False
     return True
 
 
+def construireJoueur(couleur: int) -> dict:
+    """
+    Fonction qui permet de construire un joueur avec une couleur attribuer
+
+    :param couleur: Constante parmi la liste const.COULEURS
+    :return: Retourne un dictionnaire composée d'une couleur, d'un plateau et de placer pion
+    """
+    if type(couleur) != int:
+        raise TypeError("construireJoueur : Le paramètre n’est pas un entier")
+    if couleur not in const.COULEURS:
+        raise ValueError(f"« construireJoueur : L’entier donné {couleur} n’est pas une couleur. ")
+
+    joueur = {const.COULEUR: couleur, const.PLATEAU: None, const.PLACER_PION: None}
+    return joueur

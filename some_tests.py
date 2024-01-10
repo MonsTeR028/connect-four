@@ -1,6 +1,7 @@
 from Model.Constantes import *
 from Model.Plateau import *
 from Model.Pion import *
+from Model.Joueur import *
 from random import randint, choice
 
 
@@ -97,4 +98,14 @@ def test_isRempliTableau() -> None:
     return None
 
 
-test_isRempliTableau()
+# test_isRempliTableau()
+
+
+# Joueur
+def test_construireJoueur() -> None:
+    joueur = construireJoueur(const.JAUNE)
+    print(joueur)
+    return None
+
+
+test_construireJoueur()
