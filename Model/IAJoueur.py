@@ -82,10 +82,6 @@ def valeurAjouterHorizontaleAdversaire(joueur: dict, listeColonnes: dict) -> dic
                 if listeP3[P3][-1][0] < const.NB_LINES - 1:
                     if joueur[const.PLATEAU][listeP3[P3][-1][0]+1][listeP3[P3][-1][1]+1] is None:
                         listeColonnes[listeP3[P3][-1][1] + 1] -= 95
-                if listeP3[P3][-1][1] < const.NB_LINES - 2:
-                    if couleurAdverse(joueur) == \
-                            joueur[const.PLATEAU][listeP3[P3][-1][0]][listeP3[P3][-1][1] + 2][const.COULEUR]:
-                        listeColonnes[listeP3[P3][-1][1] + 1] += 95
 
     return listeColonnes
 
