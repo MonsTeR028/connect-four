@@ -1,6 +1,7 @@
 from Model.Constantes import *
 from Model.Pion import *
 from Model.Plateau import *
+from Model.IAJoueur import *
 from random import randint
 
 #
@@ -170,5 +171,5 @@ def initialiserIAJoueur(joueur: dict, booleen: bool) -> None:
     if type(booleen) != bool:
         raise TypeError("initialiserIAJoueur : Le second paramètre n'est pas un booléen")
 
-    setPlacerPionJoueur(joueur, _placerPionJoueur)
+    setPlacerPionJoueur(joueur, colonneFinale)
     return None
