@@ -4,6 +4,7 @@ from Model.Plateau import *
 from Model.IAJoueur import *
 from random import randint
 
+
 #
 # Ce fichier contient les fonctions gérant le joueur
 #
@@ -173,3 +174,62 @@ def initialiserIAJoueur(joueur: dict, booleen: bool) -> None:
 
     setPlacerPionJoueur(joueur, colonneFinale)
     return None
+
+
+def placerPionLignePlateau(plateau: list, pion: dict, ligne: int, left: bool) -> tuple:
+    """
+    Cette fonction place le pion sur la ligne indiquée par la gauche si le booléen left vaut True ou
+    par la droite sinon, en poussant les éventuels pions existants sur la ligne.
+    :param plateau: Tableau 2D (liste de listes), pouvant contenir des pions ou rien
+    :param pion: Dictionnaire composé d'une couleur et d'un identifiant
+    :param ligne: Numéro de ligne choisit entre 0 et const.NB_LINES-1
+    :param left: Booléen indiquant la direction de la poussée (True pour la gauche, False pour la droite)
+    :return: Elle retourne un tuple constitué de la liste des pions poussés (commençant
+    par le pion ajouté) et un entier correspondant au numéro de ligne où se retrouve le dernier pion
+    de la liste ou None si le dernier pion ne change pas de ligne. Si le dernier pion est éjecté du
+    plateau, l’entier vaudra const.NB_LINES.
+    """
+    if not type_plateau(plateau):
+        raise TypeError("placerPionLignePlateau : Le premier paramètre n'est pas un plateau")
+    if type_pion(pion):
+        raise TypeError("placerPionLignePlateau : Le second paramètre n'est pas un pion")
+    if type(ligne) != int:
+        raise TypeError("placerPionLignePlateau : Le troisième paramètre n'est pas un entier")
+    if ligne < 0 or ligne > const.NB_LINES - 1:
+        raise ValueError(f"placerPionLignePlateau : Le troisième paramètre {ligne} ne désigne pas une ligne")
+    if type(left) != bool:
+        raise TypeError("placerPionLignePlateau : Le quatrième paramètre n'est pas un booléen")
+
+    pions_pousses = []
+    nouvelle_ligne_dernier_pion = None
+
+    if left:
+        colonnes = 0
+        while colonnes < const.NB_COLUMNS and plateau[ligne][colonnes] is None:
+            colonnes += 1
+
+        if colonnes < const.NB_COLUMNS:
+            colonnes -= 1
+            pions_pousses.append((ligne, colonnes))
+            plateau[ligne][colonnes] = None
+            plateau[ligne][colonnes - 1] = pion
+            nouvelle_ligne_dernier_pion = colonnes - 1
+        elif plateau[ligne][0] is None:
+            plateau[ligne][0] = pion
+            nouvelle_ligne_dernier_pion = 0
+
+    else:
+        colonnes = const.NB_COLUMNS - 1
+        while colonnes >= 0 and plateau[ligne][colonnes] is None:
+            colonnes -= 1
+
+        if colonnes >= 0:
+            pions_pousses.append((ligne, colonnes))
+            plateau[ligne][colonnes] = None
+            plateau[ligne][colonnes + 1] = pion
+            nouvelle_ligne_dernier_pion = colonnes + 1
+        elif plateau[ligne][const.NB_COLUMNS - 1] is None:
+            plateau[ligne][const.NB_COLUMNS - 1] = pion
+            nouvelle_ligne_dernier_pion = const.NB_COLUMNS - 1
+
+    return pions_pousses, nouvelle_ligne_dernier_pion
