@@ -171,7 +171,10 @@ def initialiserIAJoueur(joueur: dict, booleen: bool) -> None:
         raise TypeError("initialiserIAJoueur : Le premier paramètre n'est pas un joueur")
     if type(booleen) != bool:
         raise TypeError("initialiserIAJoueur : Le second paramètre n'est pas un booléen")
+    # IA aléatoire
+    # setPlacerPionJoueur(joueur, _placerPionJoueur)
 
+    # Mon IA
     setPlacerPionJoueur(joueur, colonneFinale)
     return None
 
