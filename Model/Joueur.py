@@ -191,7 +191,7 @@ def placerPionLignePlateau(plateau: list, pion: dict, ligne: int, left: bool) ->
     """
     if not type_plateau(plateau):
         raise TypeError("placerPionLignePlateau : Le premier paramètre n'est pas un plateau")
-    if type_pion(pion):
+    if not type_pion(pion):
         raise TypeError("placerPionLignePlateau : Le second paramètre n'est pas un pion")
     if type(ligne) != int:
         raise TypeError("placerPionLignePlateau : Le troisième paramètre n'est pas un entier")
