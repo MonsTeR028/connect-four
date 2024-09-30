@@ -1,6 +1,6 @@
 # Puissance 4
 
-Le jeu du Puissance 4 en Python/PyGame (pour la SAE 1 & 2)
+Le jeu du Puissance 4 en Python/PyGame
 
 ## Préparer l'environnement Python
 
